@@ -1,0 +1,18 @@
+{
+  "name": "nestjs",
+  "version": "1.0.0",
+  "description": "api server using NestJS",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hbjs97/NestJS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hbjs97/NestJS/issues"
+  },
+  "homepage": "https://github.com/hbjs97/NestJS#readme"
+}
