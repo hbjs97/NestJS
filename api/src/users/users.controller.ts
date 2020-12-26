@@ -19,12 +19,12 @@ export class UsersController {
     }
 
     @Delete('/:id')
-    remove(@Param('id') movieId: string) {
-        return `this will delete a movie with the id: ${movieId}`;
+    remove(@Param('id') userId: string) {
+        return `this will delete a user with the id: ${userId}`;
     }
 
     @Patch('/:id')
-    patch(@Param('id') movieId: string) {
-        return `this will patch a movie with the id: ${movieId}`;
+    patch(@Param('id') userId: string) {
+        return `this will patch a user with the id: ${userId}`;
     }
 }
