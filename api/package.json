@@ -11,7 +11,7 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "yarn build && node ./dist/main.js",
+    "start": "cross-env NODE_ENV=production yarn build && node ./dist/main.js",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
@@ -20,18 +20,29 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "modeling": "rm -rf \"./src/models\" && npx sequelize-auto -o \"./src/models\" -d test -h db-maria -u test -p 3306 -x test -e mariadb -l ts -c \"./sequelize.config.json\""
   },
   "dependencies": {
     "@nestjs/common": "^7.5.1",
     "@nestjs/core": "^7.5.1",
     "@nestjs/mapped-types": "^0.1.1",
     "@nestjs/platform-express": "^7.5.1",
+    "axios": "^0.21.1",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "lodash": "^4.17.20",
+    "mariadb": "^2.5.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.3"
+    "rxjs": "^6.6.3",
+    "sequelize": "^6.4.0",
+    "sequelize-auto": "^0.7.7",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.5.1",
@@ -51,9 +62,9 @@
     "supertest": "^6.0.0",
     "ts-jest": "^26.4.3",
     "ts-loader": "^8.0.8",
-    "ts-node": "^9.0.0",
+    "ts-node": "^9.1.1",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.0.5"
+    "typescript": "^4.1.3"
   },
   "jest": {
     "moduleFileExtensions": [
