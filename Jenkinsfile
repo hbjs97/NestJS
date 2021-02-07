@@ -42,6 +42,8 @@ pipeline {
                     '''
                 }
                 // TODO: push dockerhub
+                //      need docker credential and docker hub login
+                //      and, docker-compose -f stack.yaml push
             }
             post {
                 failure {
@@ -60,18 +62,23 @@ pipeline {
                 
                 dir('./') {
                     sh '''
-                    docker-compose up -d --build
+                    echo 'need docker swarm deploy'
                     '''
                     // docker stop pipelinetest-db-maria || true && docker rm pipelinetest-db-maria || true
                     // docker stop pipelinetest-api || true && docker rm pipelinetest-api || true
                     // docker run -p 13307:3306 -d --name pipelinetest-db-maria hbjs97/pipelinetest-db-maria
                     // docker run -p 4100:4100 -d --name pipelinetest-api hbjs97/pipelinetest-api
+                    // fail -> environment uncaught in db-build
 
-                    // docker run -p 4100:4100 -p 13307:3306 -d --name pipelinetest hbjs97/pipelinetest
+                    // docker run -p 4100:4100 -d --name pipelinetest-db-maria hbjs97/pipelinetest-db-maria
+                    // success -> BUT!! -> At the same time, need db-maria
                 }
 
             }
             // TODO: pull image from docker-hub and, deploy docker-swarm
+            // docker-compose -f stack.yaml pull;
+            // docker stack deploy -c stack.yaml pipelinetest;
+
             post {
                 success {
                     echo 'deploy success!'
