@@ -4,15 +4,16 @@ pipeline {
     stages {
         stage('Prepare') {
             agent any
-            steps {
-                echo "Clonning Repository"
 
-                dir ('/home') {
-                    git url: 'https://github.com/hbjs97/NestJS.git',
-                        branch: 'main',
-                        credentialsId: 'github'   
-                }
+            steps {
+                echo "Clonning Repository" 
+
+                echo "1. Current workspace is ${env.WORKSPACE}"
+                echo "2. Current workspace is $WORKSPACE"
                 
+                git url: 'https://github.com/hbjs97/NestJS.git',
+                    branch: 'main',
+                    credentialsId: 'github'
             }
 
             post {
@@ -35,7 +36,12 @@ pipeline {
             steps {
                 echo 'Build Backend'
 
-                dir ('/home') {
+                echo "3. Current workspace is ${env.WORKSPACE}"
+                echo "4. Current workspace is $WORKSPACE"
+
+                dir ('./') {
+                    echo "5. Current workspace is ${env.WORKSPACE}"
+                    echo "6. Current workspace is $WORKSPACE"
                     sh '''
                     docker-compose build
                     '''
