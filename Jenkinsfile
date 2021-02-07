@@ -4,12 +4,15 @@ pipeline {
     stages {
         stage('Prepare') {
             agent any
-
             steps {
                 echo "Clonning Repository"
-                git url: 'https://github.com/hbjs97/NestJS.git',
-                    branch: 'main',
-                    credentialsId: 'github'
+
+                dir ('/home') {
+                    git url: 'https://github.com/hbjs97/NestJS.git',
+                        branch: 'main',
+                        credentialsId: 'github'   
+                }
+                
             }
 
             post {
@@ -32,7 +35,7 @@ pipeline {
             steps {
                 echo 'Build Backend'
 
-                dir ('./') {
+                dir ('/home') {
                     sh '''
                     docker-compose build
                     '''
