@@ -1,7 +1,11 @@
                 // echo "1. Current workspace is ${env.WORKSPACE}"
                 // echo "2. Current workspace is $WORKSPACE"
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:12.19'
+        }
+    }
 
     stages {
         stage('Prepare') {
