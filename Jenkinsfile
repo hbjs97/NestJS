@@ -31,40 +31,65 @@ pipeline {
             }
         }
         
-        stage('Build') {
+        stage('Build npm') {
             agent any
             steps {
                 echo 'Build Backend'
 
+                dir('./api') {
+                    sh '''
+                    npm install
+                    '''
+                }
+
+            }
+            post {
+                failure {
+                    error 'build fail...'
+                }
+                success {
+                    echo 'npm install success'
+                }
+            }
+        }
+
+        stage('Build Docker') {
+            agent any
+            steps {
+                echo 'Build Docker'
+
                 sh '''
-                docker-compose build
+                docker-compose up -d --build
                 '''
             }
             post {
                 failure {
                     error 'build fail...'
                 }
-            }
-        }
-
-        stage('Deploy') {
-            agent any
-            steps {
-                echo 'Deploy Backend'
-                
-                dir('./') {
-                    sh '''
-                    docker-compose up -d
-                    '''
-                }
-
-            }
-            post {
                 success {
-                    echo 'deploy success'
+                    echo 'stack up success...'
                 }
             }
         }
+
+        // stage('Deploy') {
+        //     agent any
+        //     steps {
+        //         echo 'Deploy Backend'
+                
+        //         dir('./') {
+        //             sh '''
+        //             docker-compose up -d --build
+        //             '''
+        //         }
+
+        //     }
+        //     post {
+        //         success {
+        //             echo 'deploy success'
+        //         }
+        //     }
+        // }
 
     }
 }
