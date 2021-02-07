@@ -63,5 +63,18 @@ pipeline {
                 }
             }
         }
+
+        post {
+            always {
+                cleanup
+            }
+            failure {
+                echo 'fail'
+            }
+            success {
+                echo 'success'
+            }
+        }
+
     }
 }
