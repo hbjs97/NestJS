@@ -18,7 +18,7 @@ pipeline {
                 }
 
                 always {
-                    echo 'tried...'
+                    echo 'tried....'
                 }
 
                 cleanup {
