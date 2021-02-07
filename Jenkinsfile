@@ -56,23 +56,11 @@ pipeline {
                     '''
                 }
 
-                post {
-                    success {
-                        echo 'deploy success'
-                    }
+            }
+            post {
+                success {
+                    echo 'deploy success'
                 }
-            }
-        }
-
-        post {
-            always {
-                cleanup
-            }
-            failure {
-                echo 'fail'
-            }
-            success {
-                echo 'success'
             }
         }
 
