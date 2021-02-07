@@ -1,71 +1,92 @@
 pipeline {
     agent any
     
-    triggers {                                               
-        pollSCM('*/3****')
-    }
-
     stages {
-        stage('Prepare') {
-            agent any
-
-            steps {
-                echo "Clonning Repository"
-                git url: 'https://github.com/hbjs97/NestJS.git',
-                    branch: 'main',
-                    credentialsId: 'gittest'
-            }
-
-            post {
-                success {
-                    echo 'Repository clone success'
-                }
-
-                always {
-                    echo 'tried...'
-                }
-
-                cleanup {
-                    echo 'after all other post condition'
-                }
+        stage('build') {
+            steps{
+                echo 'build...'
             }
         }
-        
-        stage('Build') {
-            agent any
-            steps {
-                echo 'Build Backend'
-
-                dir ('./') {
-                    sh '''
-                    docker-compose build
-                    '''
-                }
-            }
-            post {
-                failure {
-                    error 'build fail...'
-                }
+        stage('test') {
+            steps{
+                echo 'test...'
             }
         }
-
-        stage('Deploy') {
-            agent any
-            steps {
-                echo 'Deploy Backend'
-                
-                dir('./') {
-                    sh '''
-                    docker-compose up -d
-                    '''
-                }
-
-                post {
-                    success {
-                        echo 'deploy success'
-                    }
-                }
+        stage('deploy') {
+            steps{
+                echo 'deploy...'
             }
         }
     }
 }
+// pipeline {
+//     agent any
+    
+//     triggers {                                               
+//         pollSCM('*/3****')
+//     }
+
+//     stages {
+//         stage('Prepare') {
+//             agent any
+
+//             steps {
+//                 echo "Clonning Repository"
+//                 git url: 'https://github.com/hbjs97/NestJS.git',
+//                     branch: 'main',
+//                     credentialsId: 'gittest'
+//             }
+
+//             post {
+//                 success {
+//                     echo 'Repository clone success'
+//                 }
+
+//                 always {
+//                     echo 'tried...'
+//                 }
+
+//                 cleanup {
+//                     echo 'after all other post condition'
+//                 }
+//             }
+//         }
+        
+//         stage('Build') {
+//             agent any
+//             steps {
+//                 echo 'Build Backend'
+
+//                 dir ('./') {
+//                     sh '''
+//                     docker-compose build
+//                     '''
+//                 }
+//             }
+//             post {
+//                 failure {
+//                     error 'build fail...'
+//                 }
+//             }
+//         }
+
+//         stage('Deploy') {
+//             agent any
+//             steps {
+//                 echo 'Deploy Backend'
+                
+//                 dir('./') {
+//                     sh '''
+//                     docker-compose up -d
+//                     '''
+//                 }
+
+//                 post {
+//                     success {
+//                         echo 'deploy success'
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
