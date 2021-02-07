@@ -1,11 +1,6 @@
                 // echo "1. Current workspace is ${env.WORKSPACE}"
                 // echo "2. Current workspace is $WORKSPACE"
 pipeline {
-    agent {
-        docker {
-            image 'node:12.19'
-        }
-    }
 
     stages {
         stage('Prepare') {
@@ -35,28 +30,6 @@ pipeline {
             }
         }
         
-        stage('Build npm') {
-            agent any
-            steps {
-                echo 'Build Backend'
-
-                dir('./api') {
-                    sh '''
-                    npm install
-                    '''
-                }
-
-            }
-            post {
-                failure {
-                    error 'build fail...'
-                }
-                success {
-                    echo 'npm install success'
-                }
-            }
-        }
-
         stage('Build Docker') {
             agent any
             steps {
