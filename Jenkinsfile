@@ -1,6 +1,7 @@
                 // echo "1. Current workspace is ${env.WORKSPACE}"
                 // echo "2. Current workspace is $WORKSPACE"
 pipeline {
+    agent any
 
     stages {
         stage('Prepare') {
