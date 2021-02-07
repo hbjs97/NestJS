@@ -1,30 +1,5 @@
-// pipeline {
-//     agent any
-    
-//     stages {
-//         stage('build') {
-//             steps{
-//                 echo 'build...'
-//             }
-//         }
-//         stage('test') {
-//             steps{
-//                 echo 'test...'
-//             }
-//         }
-//         stage('deploy') {
-//             steps{
-//                 echo 'deploy...'
-//             }
-//         }
-//     }
-// }
 pipeline {
     agent any
-    
-    triggers {                                               
-        pollSCM('*/3****')
-    }
 
     stages {
         stage('Prepare') {
@@ -34,7 +9,7 @@ pipeline {
                 echo "Clonning Repository"
                 git url: 'https://github.com/hbjs97/NestJS.git',
                     branch: 'main',
-                    credentialsId: 'gittest'
+                    credentialsId: 'github'
             }
 
             post {
