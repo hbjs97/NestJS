@@ -36,9 +36,11 @@ pipeline {
             steps {
                 echo 'Build Docker'
 
-                sh '''
-                docker-compose up -d --build
-                '''
+                dir('./') {    
+                    sh '''
+                    docker-compose -f stack.yaml build
+                    '''
+                }
             }
             post {
                 failure {
@@ -50,24 +52,25 @@ pipeline {
             }
         }
 
-        // stage('Deploy') {
-        //     agent any
-        //     steps {
-        //         echo 'Deploy Backend'
+        stage('Deploy') {
+            agent any
+            steps {
+                echo 'Deploy Backend'
                 
-        //         dir('./') {
-        //             sh '''
-        //             docker-compose up -d --build
-        //             '''
-        //         }
+                dir('./') {
+                    sh '''
+                    docker stop hbjs97/pipelinetest || true && docker rm hbjs97/pipelinetest || true
+                    docker run -p 4100:4100 -p 13307:3306 -d --name hbjs97/pipelinetest hbjs97/pipelinetest
+                    '''
+                }
 
-        //     }
-        //     post {
-        //         success {
-        //             echo 'deploy success'
-        //         }
-        //     }
-        // }
+            }
+            post {
+                success {
+                    echo 'deploy success!'
+                }
+            }
+        }
 
     }
 }
