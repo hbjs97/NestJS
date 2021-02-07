@@ -29,3 +29,9 @@ services:
       - ./api:/var/www/html
       - api_node_modules:/var/www/html/node_modules
     restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+      - DB_URL=db-maria
