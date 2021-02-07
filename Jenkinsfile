@@ -59,8 +59,8 @@ pipeline {
                 
                 dir('./') {
                     sh '''
-                    docker stop hbjs97/pipelinetest || true && docker rm hbjs97/pipelinetest || true
-                    docker run -p 4100:4100 -p 13307:3306 -d --name hbjs97/pipelinetest hbjs97/pipelinetest
+                    docker stop pipelinetest || true && docker rm pipelinetest || true
+                    docker run -p 4100:4100 -p 13307:3306 -d --name pipelinetest hbjs97/pipelinetest
                     '''
                 }
 
