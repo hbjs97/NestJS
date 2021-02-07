@@ -41,6 +41,7 @@ pipeline {
                     docker-compose -f stack.yaml build
                     '''
                 }
+                // TODO: push dockerhub
             }
             post {
                 failure {
@@ -59,12 +60,16 @@ pipeline {
                 
                 dir('./') {
                     sh '''
-                    docker stop pipelinetest || true && docker rm pipelinetest || true
-                    docker run -p 4100:4100 -p 13307:3306 -d --name pipelinetest hbjs97/pipelinetest
+                    docker stop pipelinetest-db-maria || true && docker rm pipelinetest-db-maria || true
+                    docker stop pipelinetest-api || true && docker rm pipelinetest-api || true
+                    docker run -p 13307:3306 -d --name pipelinetest-db-maria hbjs97/pipelinetest-db-maria
+                    docker run -p 4100:4100 -d --name pipelinetest-api hbjs97/pipelinetest-api
                     '''
+                    // docker run -p 4100:4100 -p 13307:3306 -d --name pipelinetest hbjs97/pipelinetest
                 }
 
             }
+            // TODO: pull image from docker-hub and, deploy docker-swarm
             post {
                 success {
                     echo 'deploy success!'
