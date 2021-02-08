@@ -31,6 +31,6 @@ services:
       - ./api:/var/www/html
       - api_node_modules:/var/www/html/node_modules
     deploy:
-      replicas: 6
+      replicas: 3
       restart_policy:
         condition: on-failure

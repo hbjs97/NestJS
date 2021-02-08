@@ -41,9 +41,19 @@ pipeline {
                     docker-compose -f stack.yaml build
                     '''
                 }
-                // TODO: push dockerhub
+                // TODO: (if, Build and deploy on separate servers) 
+                //      push dockerhub
                 //      need docker credential and docker hub login
                 //      and, docker-compose -f stack.yaml push
+                //      (else, Build and deploy on the same server)
+                //      deploy
+            }
+            steps {
+                dir('./') {
+                    sh ```
+                    docker-compose -f stack.yaml push
+                    ```
+                }
             }
             post {
                 failure {
@@ -62,7 +72,7 @@ pipeline {
                 
                 dir('./') {
                     sh '''
-                    echo 'need docker swarm deploy'
+                    docker stack deploy -c stack.yaml pipelinetest
                     '''
                     // docker stop pipelinetest-db-maria || true && docker rm pipelinetest-db-maria || true
                     // docker stop pipelinetest-api || true && docker rm pipelinetest-api || true
@@ -77,7 +87,8 @@ pipeline {
             }
             // TODO: pull image from docker-hub and, deploy docker-swarm
             // docker-compose -f stack.yaml pull;
-            // docker stack deploy -c stack.yaml pipelinetest;
+            // docker stack deploy -c stack.yaml pipelinetest;  -> stack on
+            // docker stack remove pipelinetest;    ->  remove stack
 
             post {
                 success {
