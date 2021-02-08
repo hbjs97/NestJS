@@ -50,9 +50,9 @@ pipeline {
             }
             steps {
                 dir('./') {
-                    sh ```
+                    sh '''
                     docker-compose -f stack.yaml push
-                    ```
+                    '''
                 }
             }
             post {
