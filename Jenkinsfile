@@ -48,7 +48,21 @@ pipeline {
                 //      (else, Build and deploy on the same server)
                 //      deploy
             }
+            post {
+                failure {
+                    error 'build fail...'
+                }
+                success {
+                    echo 'stack up success...'
+                }
+            }
+        }
+
+        stage('Stack Push') {
+            agent any
+            
             steps {
+                echo 'Stack Push'
                 dir('./') {
                     sh '''
                     docker-compose -f stack.yaml push
@@ -57,10 +71,10 @@ pipeline {
             }
             post {
                 failure {
-                    error 'build fail...'
+                    error 'push fail...'
                 }
                 success {
-                    echo 'stack up success...'
+                    echo 'stack push success...'
                 }
             }
         }
