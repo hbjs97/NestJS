@@ -13,4 +13,4 @@ COPY ./api /var/www/html
 COPY ./wait-for-it.sh /wait-for-it.sh
 RUN ["chmod", "+x", "/wait-for-it.sh"]
 
-CMD ["bash", "-c", "/wait-for-it.sh db-maria:3306 -- yarn && yarn start"]
+CMD ["bash", "-c", "/wait-for-it.sh db-maria:3306 -- npm install && npm run start"]
