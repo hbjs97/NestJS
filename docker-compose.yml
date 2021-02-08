@@ -28,4 +28,4 @@ services:
     volumes:
       - ./api:/var/www/html
       - api_node_modules:/var/www/html/node_modules
-    # restart: always
+    command: bash -c "/wait-for-it.sh db-maria:3306 --strict -- yarn && yarn start"

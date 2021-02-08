@@ -8,10 +8,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # source
 WORKDIR /var/www/html
-RUN pwd
 COPY ./api /var/www/html
-RUN pwd
 COPY ./wait-for-it.sh /wait-for-it.sh
 RUN ["chmod", "+x", "/wait-for-it.sh"]
 
-CMD ["bash", "-c", "/wait-for-it.sh db-maria:3306 -- npm install && npm run start"]
+CMD ["bash", "-c", "/wait-for-it.sh db-maria:3306 --strict -- yarn && yarn start"]
