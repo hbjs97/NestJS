@@ -28,7 +28,7 @@ services:
       - 9339:9339
     env_file: .env
     volumes:
-      - ./api:/var/www/html
+      # - ./api:/var/www/html
       - api_node_modules:/var/www/html/node_modules
     deploy:
       replicas: 3
