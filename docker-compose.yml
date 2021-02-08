@@ -11,6 +11,7 @@ services:
       dockerfile: db-maria.Dockerfile
     ports:
       - 13307:3306
+    restart: always
     volumes:
       - db-maria_data:/var/lib/mysql
     env_file:
@@ -27,3 +28,4 @@ services:
     volumes:
       - ./api:/var/www/html
       - api_node_modules:/var/www/html/node_modules
+    # restart: always
