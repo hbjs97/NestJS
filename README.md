@@ -2,7 +2,7 @@
 
 ## Build  
 ### Jenkins 
-#### - github <-> jenkins webhook
+#### github <-> jenkins webhook
 #### Docker in Docker  
 - api_server  
 - db_server  
