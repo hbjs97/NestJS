@@ -85,9 +85,11 @@ pipeline {
                 echo 'Deploy Backend'
                 
                 dir('./') {
-                    sh '''
-                    docker stack deploy -c stack.yaml pipelinetest
-                    '''
+                    echo '1'
+                    // sh '''
+                    // docker stack deploy -c stack.yaml pipelinetest
+                    // '''
+
                     // docker stop pipelinetest-db-maria || true && docker rm pipelinetest-db-maria || true
                     // docker stop pipelinetest-api || true && docker rm pipelinetest-api || true
                     // docker run -p 13307:3306 -d --name pipelinetest-db-maria hbjs97/pipelinetest-db-maria
