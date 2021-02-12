@@ -31,7 +31,7 @@ pipeline {
             }
         }
         stage('Set env file') {
-            step {
+            steps {
                 echo "set environment variable file" 
                 dir('./'){
                 sh '''
