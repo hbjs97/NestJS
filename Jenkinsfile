@@ -9,17 +9,19 @@ pipeline {
 
             steps {
                 echo "Clonning Repository" 
-                echo "Print env"
-                echo $DB_URL
-                echo $MYSQL_DATABASE
-                echo $MYSQL_PASSWORD
-                echo $MYSQL_ROOT_PASSWORD
-                echo $MYSQL_USER
-
                 
                 git url: 'https://github.com/hbjs97/NestJS.git',
                     branch: 'main',
                     credentialsId: 'github'
+            }
+
+            steps {
+                echo "set environment variable file" 
+                dir('./'){
+                sh '''
+                cp /environment/.env .
+                '''
+                }
             }
 
             post {
