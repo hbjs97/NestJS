@@ -86,6 +86,7 @@ pipeline {
                 
                 dir('./') {
                     echo '1'
+                    
                     // sh '''
                     // docker stack deploy -c stack.yaml pipelinetest
                     // '''
