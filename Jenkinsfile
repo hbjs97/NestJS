@@ -13,14 +13,6 @@ pipeline {
                 git url: 'https://github.com/hbjs97/NestJS.git',
                     branch: 'main',
                     credentialsId: 'github'
-                steps {
-                    echo "set environment variable file" 
-                    dir('./'){
-                    sh '''
-                    cp /environment/.env .
-                    '''
-                    }
-                }
             }
 
 
@@ -38,7 +30,26 @@ pipeline {
                 }
             }
         }
-        
+        stage('Set env file') {
+            step {
+                echo "set environment variable file" 
+                dir('./'){
+                sh '''
+                cp /environment/.env .
+                '''
+                }
+            }
+
+            post {
+                success {
+                    echo '.env file copy success'
+                }
+                failure {
+                    echo '.env file copy fail'
+                }
+            }
+        }   
+
         stage('Build Docker') {
             agent any
             steps {
