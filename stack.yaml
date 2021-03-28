@@ -11,7 +11,7 @@ services:
       dockerfile: db-maria.Dockerfile
     image: hbjs97/pipelinetest-db-maria
     ports:
-      - 13307:3306
+      - 13306:3306
     restart: always
     volumes:
       - db-maria_data:/var/lib/mysql
@@ -24,8 +24,8 @@ services:
       dockerfile: api.Dockerfile
     image: hbjs97/pipelinetest-api
     ports:
-      - 4100:4100
-      - 9339:9339
+      - 3100:3100
+      - 9229:9229
     env_file: .env
     volumes:
       # - ./api:/var/www/html
