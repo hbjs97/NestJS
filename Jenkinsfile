@@ -54,8 +54,10 @@ pipeline {
             agent any
             steps {
                 echo 'Build Docker'
-
-                dir('./') {    
+                dir('./') {  
+                    sh '''
+                    cp ~/environment/.env .
+                    '''
                     sh '''
                     docker-compose -f stack.yaml build
                     '''
