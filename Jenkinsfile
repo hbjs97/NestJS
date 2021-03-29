@@ -35,7 +35,7 @@ pipeline {
                 echo "set environment variable file" 
                 dir('./'){
                 sh '''
-                cp /environment/.env .
+                cp ~/environment/.env .
                 '''
                 }
             }
