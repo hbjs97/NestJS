@@ -58,8 +58,13 @@ pipeline {
                     sh '''
                     cp ~/environment/.env .
                     '''
+                  /*
                     sh '''
                     docker-compose -f stack.yaml build
+                    '''
+                  */
+                    sh '''
+                    docker-compose up -d --build
                     '''
                 }
                 // TODO: (if, Build and deploy on separate servers) 
@@ -78,7 +83,7 @@ pipeline {
                 }
             }
         }
-
+/*
         stage('Stack Push') {
             agent any
             
@@ -134,6 +139,6 @@ pipeline {
                 }
             }
         }
-
+*/
     }
 }
