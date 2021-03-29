@@ -58,13 +58,8 @@ pipeline {
                     sh '''
                     cp ~/environment/.env .
                     '''
-                  /*
                     sh '''
                     docker-compose -f stack.yaml build
-                    '''
-                  */
-                    sh '''
-                    docker-compose up -d --build
                     '''
                 }
                 // TODO: (if, Build and deploy on separate servers) 
@@ -83,7 +78,6 @@ pipeline {
                 }
             }
         }
-/*
         stage('Stack Push') {
             agent any
             
@@ -113,9 +107,9 @@ pipeline {
                 dir('./') {
                     echo '1'
 
-                    // sh '''
-                    // docker stack deploy -c stack.yaml pipelinetest
-                    // '''
+                    sh '''
+                    docker stack deploy -c stack.yaml pipelinetest
+                    '''
 
                     // docker stop pipelinetest-db-maria || true && docker rm pipelinetest-db-maria || true
                     // docker stop pipelinetest-api || true && docker rm pipelinetest-api || true
@@ -139,6 +133,5 @@ pipeline {
                 }
             }
         }
-*/
     }
 }
