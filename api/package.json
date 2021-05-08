@@ -7,7 +7,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "cross-env NODE_ENV=develop nodemon -L -e ts --exec 'node --nolazy --inspect=0.0.0.0:9339 --require ts-node/register ./src/main.ts'",
+    "dev": "cross-env NODE_ENV=develop nodemon -L -e ts --exec 'node --nolazy --inspect=0.0.0.0:9229 --require ts-node/register ./src/main.ts'",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

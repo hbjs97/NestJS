@@ -37,7 +37,7 @@ pipeline {
                 echo "set environment variable file" 
                 dir('./'){
                 sh '''
-                cp /environment/.env .
+                cp ~/environment/.env .
                 '''
                 }
             }
@@ -56,8 +56,10 @@ pipeline {
             agent any
             steps {
                 echo 'Build Docker'
-
-                dir('./') {    
+                dir('./') {  
+                    sh '''
+                    cp ~/environment/.env .
+                    '''
                     sh '''
                     docker-compose -f stack.yaml build
                     '''
@@ -78,7 +80,6 @@ pipeline {
                 }
             }
         }
-
         stage('Stack Push') {
             agent any
             
@@ -108,9 +109,9 @@ pipeline {
                 dir('./') {
                     echo '1'
 
-                    // sh '''
-                    // docker stack deploy -c stack.yaml pipelinetest
-                    // '''
+                    sh '''
+                    docker stack deploy -c stack.yaml pipelinetest
+                    '''
 
                     // docker stop pipelinetest-db-maria || true && docker rm pipelinetest-db-maria || true
                     // docker stop pipelinetest-api || true && docker rm pipelinetest-api || true
@@ -134,6 +135,5 @@ pipeline {
                 }
             }
         }
-
     }
 }
